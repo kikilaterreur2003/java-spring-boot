@@ -2,6 +2,9 @@ package com.railway.helloworld.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.railway.helloworld.controller.AirportModel.ICAO;
+import com.railway.helloworld.controller.AirportModel.Temperature;
+import com.railway.helloworld.controller.bourseModel.BourseResult;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import tp3midlleware.example._0.controller.AirportModel.ICAO;
-import tp3midlleware.example._0.controller.AirportModel.Temperature;
-import tp3midlleware.example._0.controller.bourseModel.BourseResult;
+
 
 import java.util.Optional;
 
