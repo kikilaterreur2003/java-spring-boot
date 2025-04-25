@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.railway.helloworld.controller.AirportModel.ICAO;
 import com.railway.helloworld.controller.AirportModel.Temperature;
 import com.railway.helloworld.controller.bourseModel.BourseResult;
+import com.railway.helloworld.controller.parser.ArithmeticParser;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
-
+/**
+ *
+ * Parser made thanks to mistral ai rest is handmade
+ */
 @RestController
 @RequestMapping(path = "")
 public class Controller {
@@ -24,8 +28,7 @@ public class Controller {
     private RestTemplate restTemplate;
 
     static String KeyBourse =  "WTV9OZSL74MAM5Q2.";
-    //https://bootcamptoprod.com/exposing-a-local-spring-boot-app-to-the-web/
-    //mathieu.merien@etudiant.univ-rennes.fr mdp 571260lolo
+
     ObjectMapper objectMapper ;
     public Controller(RestTemplate restTemplate, ObjectMapper objectMapper) throws JsonProcessingException {
         this.objectMapper = objectMapper;
@@ -54,16 +57,15 @@ public class Controller {
             String timeseriesname = data.getData().keySet().stream().min((a, b) -> b.compareTo(a))
                     .orElse(null);
             String price = data.getData().get(timeseriesname).getLow();
-            ;
             assert(data.getMetadata().getSymbole().equals(code)):data.getMetadata().getSymbole()+" != "+code;
 
             return ResponseEntity.ok((int)Double.parseDouble(price));
         }
-        if(queryEval.isPresent()){
-            Integer stock=2;
-            System.out.println(queryEval.get());
-            //TODO do the math
-            return ResponseEntity.ok(stock);
+        if(queryEval.isPresent()){;
+            String code=queryEval.get();
+            ArithmeticParser parser= new ArithmeticParser(code);
+            int value = parser.parse();
+            return ResponseEntity.ok(value);
         }
         else{
             return ResponseEntity.ok(0);
