@@ -11,15 +11,15 @@ public class HelloworldApplication {
 
 		SpringApplication.run(HelloworldApplication.class, args);
 
-	/*
-		String expression = "3+5*(2-8)";
+
+		String expression = "7+1/3+2/3";
 		ArithmeticParser parser = new ArithmeticParser(expression);
 		try {
-			int result = parser.parse();
+			double result = parser.parse();
 			System.out.println("Result: " + result);
 		} catch (IllegalArgumentException e) {
 			System.out.println("Error: " + e.getMessage());
-		}*/
+		}
 	}
 
 

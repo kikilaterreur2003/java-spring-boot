@@ -20,7 +20,9 @@ import java.util.Optional;
 /**
  *
  * Parser made thanks to mistral ai rest is handmade
+ * Use of railroad for deloyment
  */
+//Error testing url https://java-spring-boot-production-8b3b.up.railway.app/: Value for ord (22) is out of tolerance
 @RestController
 @RequestMapping(path = "")
 public class Controller {
@@ -64,8 +66,9 @@ public class Controller {
         if(queryEval.isPresent()){;
             String code=queryEval.get();
             ArithmeticParser parser= new ArithmeticParser(code);
-            int value = parser.parse();
-            return ResponseEntity.ok(value);
+            double value = parser.parse();
+            System.out.println(value);
+            return ResponseEntity.ok((int)value);
         }
         else{
             return ResponseEntity.ok(0);

@@ -11,20 +11,20 @@ public class ArithmeticParser {
         this.pos = 0;
     }
 
-    public int parse() {
-        int result = parseExpression();
+    public double parse() {
+        double result = parseExpression();
         if (pos != expression.length()) {
             throw new IllegalArgumentException("Invalid expression");
         }
         return result;
     }
 
-    private int parseExpression() {
-        int result = parseTerm();
+    private double parseExpression() {
+        double result = parseTerm();
         while (pos < expression.length() && (expression.charAt(pos) == '+' || expression.charAt(pos) == '-')) {
             char operator = expression.charAt(pos);
             pos++;
-            int nextTerm = parseTerm();
+            double nextTerm = parseTerm();
             if (operator == '+') {
                 result += nextTerm;
             } else {
@@ -34,12 +34,12 @@ public class ArithmeticParser {
         return result;
     }
 
-    private int parseTerm() {
-        int result = parseFactor();
+    private double parseTerm() {
+        double result = parseFactor();
         while (pos < expression.length() && (expression.charAt(pos) == '*' || expression.charAt(pos) == '/')) {
             char operator = expression.charAt(pos);
             pos++;
-            int nextFactor = parseFactor();
+            double nextFactor = parseFactor();
             if (operator == '*') {
                 result *= nextFactor;
             } else {
@@ -49,10 +49,10 @@ public class ArithmeticParser {
         return result;
     }
 
-    private int parseFactor() {
+    private double parseFactor() {
         if (expression.charAt(pos) == '(') {
             pos++;
-            int result = parseExpression();
+            double result = parseExpression();
             if (expression.charAt(pos) == ')') {
                 pos++;
                 return result;
@@ -60,7 +60,7 @@ public class ArithmeticParser {
                 throw new IllegalArgumentException("Mismatched parentheses");
             }
         } else {
-            return parseNumber();
+            return (double)parseNumber();
         }
     }
 
